@@ -100,6 +100,11 @@ e-learning/
 ├── build.xml               # Script Ant
 └── manifest.mf             # Fichier manifeste
 ````
+## Architecture
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/76417067-0a82-41fe-852f-50b349826324" />
+
+
+
 ## Technologies Utilisées
 - Java (Swing)
 - NetBeans GUI Builder
