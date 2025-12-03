@@ -101,7 +101,9 @@ e-learning/
 └── manifest.mf             # Fichier manifeste
 ````
 ## Architecture
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/76417067-0a82-41fe-852f-50b349826324" />
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/c9721bf9-578f-4623-90b0-239db74bf773" />
+
+
 
 
 
