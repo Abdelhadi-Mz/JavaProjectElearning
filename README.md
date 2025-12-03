@@ -1,131 +1,163 @@
-# Java E-Learning Management System
-A desktop-based E-Learning application built using Java Swing, built with an MVC-like structure.  
-The system manages Students, Courses, and Student-Course assignments through a simple and clear user interface.
+# Système de Gestion E-Learning en Java
+Une application E-Learning développée en Java Swing, construite selon une structure de type MVC.  
+Le système permet de gérer les étudiants, les cours, ainsi que les affectations étudiant–cours via une interface simple et intuitive.
 
 ---
 
-## Project Demo Video
-A demonstration video will be added here showing the program running and its main features.
-
-
+## Vidéo de Démonstration
+Une vidéo de démonstration sera ajoutée ici pour présenter le fonctionnement du programme ainsi que ses principales fonctionnalités.
 
 https://github.com/user-attachments/assets/a45a96ab-ebbc-4f10-bc66-fd9ca6b2fed9
 
-
 ---
 
-## Features
+## Fonctionnalités
 
-### Student Management
-- Add new students  
-- Edit student information  
-- Delete students  
-- Display all students  
-- Logic handled through the StudentService class
+### Gestion des Étudiants
+- Ajouter de nouveaux étudiants  
+- Modifier les informations d’un étudiant  
+- Supprimer un étudiant  
+- Afficher la liste complète des étudiants  
+- Logique gérée via la classe `StudentService`
 
-### Course Management
-- Add new courses  
-- Edit courses  
-- Delete courses  
-- Display all courses  
-- Logic handled through the CoursService class
+### Gestion des Cours
+- Ajouter de nouveaux cours  
+- Modifier les cours existants  
+- Supprimer des cours  
+- Afficher la liste des cours  
+- Logique gérée via la classe `CoursService`
 
-### Student–Course Assignment
-- Assign students to courses  
-- Display all student–course relationships  
-- Managed through StudentCoursService
+### Affectation Étudiant–Cours
+- Assigner un étudiant à un cours  
+- Afficher toutes les relations étudiant–cours  
+- Géré via `StudentCoursService`
 
-### User Interface (Java Swing)
-- Dashboard and forms created with NetBeans GUI Builder  
-- Panels, buttons, and tables connected to service logic  
-- Clean and organized UI structure
+### Interface Utilisateur (Java Swing)
+- Tableau de bord et formulaires créés avec NetBeans GUI Builder  
+- Panneaux, boutons et tableaux connectés à la couche de services  
+- Interface claire et bien organisée
 
 ---
+## MCD (Modèle Conceptuel de Données)
 
-## Project Structure
-Below is the directory tree, protected so it displays correctly everywhere (GitHub, browsers, editors):
+Relation :  
+Un étudiant peut être inscrit à zéro ou plusieurs cours.  
+Un cours peut être suivi par zéro ou plusieurs étudiants.
+
+Schéma :
+
+                ┌──────────────┐
+                │   STUDENT     │
+                ├──────────────┤
+                │ id : int      │
+                │ name : varchar│
+                │ email : varchar│
+                │ date : date   │
+                └───────┬──────┘
+                        │ 0,N
+                        │
+                        │
+                        │ 0,N
+                ┌───────┴────────┐
+                │  STUDENTCOURS   │
+                ├─────────────────┤
+                │ id : int        │
+                │ student_id : int│
+                │ cours_id : int  │
+                │ date_inscription│
+                │ score : int     │
+                └───────┬────────┘
+                        │ 0,N
+                        │
+                        │
+                        │ 0,N
+                ┌───────┴────────┐
+                │     COURS       │
+                ├─────────────────┤
+                │ id : int        │
+                │ categorie: varchar │
+                │ title : varchar │
+                │ nb_H : int      │
+                └─────────────────┘
+
+## Structure du Projet
+Ci-dessous, l’arborescence du projet, protégée afin d’être affichée correctement sur GitHub et dans les navigateurs :
 
 ````text
 e-learning/
 │
 ├── src/
-│   ├── Connexion/          # Connection class (database-ready structure)
+│   ├── Connexion/          # Classe de connexion (préparation à la base de données)
 │   ├── dao/                # Interfaces (IDao)
-│   ├── entities/           # Student, Course, StudentCourse models
-│   ├── services/           # CRUD operations and business logic
-│   ├── ui/                 # Java Swing user interface
-│   └── test/               # Test classes
+│   ├── entities/           # Modèles : Student, Course, StudentCourse
+│   ├── services/           # Logique métier et opérations CRUD
+│   ├── ui/                 # Interface utilisateur Java Swing
+│   └── test/               # Classes de tests
 │
-├── build/                  # NetBeans build outputs
-├── dist/                   # Packaged JAR files
-├── nbproject/              # NetBeans project metadata
-├── build.xml               # Ant build script
-└── manifest.mf             # Application manifest file
+├── build/                  # Fichiers générés par NetBeans
+├── dist/                   # Fichiers JAR empaquetés
+├── nbproject/              # Métadonnées du projet NetBeans
+├── build.xml               # Script Ant
+└── manifest.mf             # Fichier manifeste
 ````
----
-
-## Technologies Used
+## Technologies Utilisées
 - Java (Swing)
 - NetBeans GUI Builder
-- Ant Build System
-- Inno Setup (for generating the Windows installer)
-- JDBC-ready project structure
+- Système de build Ant
+- Inno Setup (pour générer l’installateur Windows)
+- Structure prête pour JDBC
 
 ---
 
 ## Installation
 
-### 1. Download the Installer
-The project is distributed as a Windows executable created using Inno Setup.
+### 1. Télécharger l’Installateur
+Le projet est distribué sous forme d’un exécutable Windows créé avec Inno Setup.
 
-Download the installer file:
+Fichier à télécharger :
 
 e-learning.exe
 
 ---
 
-### 2. Run the Installer
-- Double-click `e-learning.exe`
-- Follow the installation wizard (Next → Install → Finish)
-- A desktop shortcut will be created automatically if enabled during setup
+### 2. Lancer l’Installateur
+- Double-cliquer sur `e-learning.exe`
+- Suivre l’assistant d’installation (Suivant → Installer → Terminer)
+- Un raccourci sur le bureau sera créé automatiquement si cette option est activée pendant l’installation
 
-### 3. Launch the Application
-You can run the program either:
-- From the desktop shortcut  
-- From the installation directory created by the installer
-
----
-
-## About the Installer (Inno Setup)
-The application uses Inno Setup to generate a professional Windows installer, which provides:
-- Automatic folder creation  
-- Optional Start Menu and desktop shortcuts  
-- Clean uninstallation  
-- A simple installation experience for users  
-- Packaged executable ready for distribution  
+### 3. Lancer l’Application
+Vous pouvez exécuter le programme :
+- Depuis le raccourci du bureau  
+- Depuis le dossier d’installation généré par l’installateur
 
 ---
 
-## Project Architecture
-
-The project is designed with maintainability in mind:
-
-- `entities/` contains basic POJO models  
-- `services/` contains business logic for CRUD operations  
-- `ui/` contains all GUI components and event handling  
-- `dao/` defines the structure for data access  
-- `Connexion/` prepares the project for future database integration  
+## À Propos de l’Installateur (Inno Setup)
+L’application utilise Inno Setup pour générer un installateur Windows professionnel, offrant :
+- Création automatique des dossiers d’installation  
+- Raccourcis Bureau et Menu Démarrer optionnels  
+- Désinstallation propre  
+- Expérience d’installation simple et intuitive  
+- Exécutable prêt à être distribué  
 
 ---
 
-## Future Improvements
-- Add MySQL/SQLite database support  
-- Add login and authentication page  
-- Enhance UI design  
-- Add reporting (PDF/Excel)  
-- Add charts and analytics  
-- Add roles (admin, instructor, student)
+## Architecture du Projet
 
+Le projet est conçu pour être facilement maintenable :
+
+- `entities/` contient les modèles POJO  
+- `services/` contient la logique métier et les opérations CRUD  
+- `ui/` regroupe toutes les interfaces graphiques et la gestion des événements  
+- `dao/` définit la structure d’accès aux données  
+- `Connexion/` prépare le projet pour une future intégration de base de données  
+
+---
+
+## Améliorations Futures
+- Amélioration de l’interface utilisateur  
+- Ajout de rapports (PDF/Excel)  
+- Ajout de rôles (administrateur, instructeur, étudiant)
 ---
 
 ## Author
