@@ -5,6 +5,8 @@
  */
 package ui;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,11 +27,16 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setTitle("E-leraning ");
+        setIconImage();
         Loginbtn.requestFocusInWindow();
         pack();
         setLocationRelativeTo(null); // center window
         setResizable(false);
 
+    }
+    public void setIconImage() {
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("icons8-e-learning-35.png"));
+        this.setIconImage(icon);
     }
     public void sendEmail(String toEmail, String newPassword) {
 

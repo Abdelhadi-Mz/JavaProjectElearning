@@ -28,7 +28,7 @@ public class StudentCoursService implements IDao<StudentCours> {
     CoursService cs=new CoursService();
     @Override
     public boolean create(StudentCours o) {
-        String req = "INSERT INTO `studentCours` (`id`, `student_id`, `cours_id`, `date_inscription`, `score`) VALUES (NULL, ?, ?, ?, ?)";
+        String req = "INSERT INTO `studentCours` ( `student_id`, `cours_id`, `date_inscription`, `score`) VALUES ( ?, ?, ?, ?)";
         try {
             PreparedStatement ps= Connexion.getConnection().prepareStatement(req);
             ps.setInt(1, o.getStudent().getId());
@@ -92,6 +92,21 @@ public class StudentCoursService implements IDao<StudentCours> {
         }
         return null;
     }
+    public StudentCours findBy2Id(int student_id,int cours_id){
+        try {
+            String req = "select * from studentCours where student_id = ? and cours_id=?";
+            PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
+            ps.setInt(1, student_id);
+            ps.setInt(2, cours_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new StudentCours(ss.findById(rs.getInt("student_id")), cs.findById(rs.getInt("cours_id")),rs.getDate("date_inscription"), rs.getInt("score"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentCours.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public List<StudentCours> findHistoryByCours(int coursId) {
         List<StudentCours> list1 = new ArrayList<>();
         String req = "select * from studentCours where cours_id = ?";
@@ -116,7 +131,7 @@ public class StudentCoursService implements IDao<StudentCours> {
             PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                SCs.add(new StudentCours(rs.getInt("id"),ss.findById(rs.getInt("student_id")), cs.findById(rs.getInt("cours_id")),rs.getDate("date_inscription"), rs.getInt("score")));
+                SCs.add(new StudentCours(ss.findById(rs.getInt("student_id")), cs.findById(rs.getInt("cours_id")),rs.getDate("date_inscription"), rs.getInt("score")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(StudentCours.class.getName()).log(Level.SEVERE, null, ex);

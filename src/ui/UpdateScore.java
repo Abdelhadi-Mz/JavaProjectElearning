@@ -14,21 +14,23 @@ import services.StudentCoursService;
  * @author Destockafric
  */
 public class UpdateScore extends javax.swing.JFrame {
-    int ScId;
+    int student_id;
+    int cours_id;
     Main parent;
     StudentCoursService scs=null;
     /**
      * Creates new form UpdateScore
      */
-    public UpdateScore(int id,Main parent) {
-        this.ScId=id;
+    public UpdateScore(int student_id,int cours_id,Main parent) {
+        this.student_id=student_id;
+        this.cours_id=cours_id;
         this.parent=parent;
         initComponents();
         scs=new StudentCoursService();
         loadtoUpdate();
     }
     public void loadtoUpdate(){
-        StudentCours sc=scs.findById(ScId);
+        StudentCours sc=scs.findBy2Id(student_id,cours_id);
         UscoreSpinner.setValue(sc.getScore());
     }
     /**
@@ -109,8 +111,8 @@ public class UpdateScore extends javax.swing.JFrame {
 
     private void Updatebtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Updatebtn1ActionPerformed
         int Nscore = (int) UscoreSpinner.getValue();
-        StudentCours sc =scs.findById(ScId);
-        StudentCours Usc=new StudentCours(ScId,sc.getStudent(),sc.getCours(),sc.getDate(),Nscore);
+        StudentCours sc =scs.findBy2Id(student_id,cours_id);
+        StudentCours Usc=new StudentCours(sc.getStudent(),sc.getCours(),sc.getDate(),Nscore);
         scs.update(Usc);
         JOptionPane.showMessageDialog(this, "Score updated!");
         parent.loadProg();

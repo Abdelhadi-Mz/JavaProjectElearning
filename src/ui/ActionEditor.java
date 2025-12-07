@@ -55,6 +55,8 @@ public class ActionEditor extends AbstractCellEditor implements TableCellEditor 
                 int id = (int) table.getValueAt(row, 0);
                 stopCellEditing();
                 parent.onDeleteStudent(id);
+                parent.loadDashStats();
+                parent.loadStdDrop();
 
             });
         } 
@@ -74,6 +76,8 @@ public class ActionEditor extends AbstractCellEditor implements TableCellEditor 
                 int id = (int) table.getValueAt(row, 0);
                 stopCellEditing();
                 parent.onDeleteCours(id);
+                parent.loadDashStats();
+                parent.loadCrsDrop();
 
             });
         }
@@ -84,8 +88,9 @@ public class ActionEditor extends AbstractCellEditor implements TableCellEditor 
             int row = editingRow;     
             if (row < 0) return;
 
-            int id = (int) table.getValueAt(row, 0);
-            UpdateScore editForm = new UpdateScore(id, parent);
+            int student_id = (int) table.getValueAt(row, 0);
+            int cours_id   = (int) table.getValueAt(row, 1);
+            UpdateScore editForm = new UpdateScore(student_id,cours_id, parent);
             editForm.setVisible(true);
             editForm.setLocationRelativeTo(null);
             });
@@ -95,9 +100,10 @@ public class ActionEditor extends AbstractCellEditor implements TableCellEditor 
             stopCellEditing();
             int row = editingRow;
             if (row < 0) return;
-
-            int id = (int) table.getValueAt(row, 0);
-            parent.onDeleteSc(id);
+            int student_id = (int) table.getValueAt(row, 0);
+            int cours_id   = (int) table.getValueAt(row, 1);
+            parent.onDeleteSc(student_id,cours_id);
+            parent.loadDashStats();
             });
         }
         panel.add(editBtn);
@@ -106,12 +112,11 @@ public class ActionEditor extends AbstractCellEditor implements TableCellEditor 
 
 private int editingRow = -1;
 
-@Override
-public Component getTableCellEditorComponent(JTable table, Object value,
-                                             boolean isSelected, int row, int column) {
-    editingRow = row;
-    return panel;
-}
+    @Override
+    public Component getTableCellEditorComponent(JTable table, Object value,boolean isSelected, int row, int column) {
+        editingRow = row;
+        return panel;
+    }
 
     @Override
     public Object getCellEditorValue() {
