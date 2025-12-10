@@ -47,39 +47,9 @@ https://github.com/user-attachments/assets/a5e71010-ecd8-4032-a6c5-77b6f5113750
 Relation :  
 Un étudiant peut être inscrit à zéro ou plusieurs cours.  
 Un cours peut être suivi par zéro ou plusieurs étudiants.
+<img width="773" height="387" alt="xmcd" src="https://github.com/user-attachments/assets/acfd2fad-b2c9-4cbe-9cce-3077e8349dd2" />
 
-Schéma :
-
-                ┌──────────────┐
-                │   STUDENT     │
-                ├──────────────┤
-                │ id : int      │
-                │ name : varchar│
-                │ email : varchar│
-                │ date : date   │
-                └───────┬──────┘
-                        │ 0,N
-                        │
-                        │
-                        │ 0,N
-                ┌───────┴────────┐
-                │  STUDENTCOURS   │
-                ├─────────────────┤       
-                │ date_inscription│
-                │ score : int     │
-                └───────┬────────┘
-                        │ 0,N
-                        │
-                        │
-                        │ 0,N
-                ┌───────┴────────┐
-                │     COURS       │
-                ├─────────────────┤
-                │ id : int        │
-                │ categorie: varchar │
-                │ title : varchar │
-                │ nb_H : int      │
-                └─────────────────┘
+              
 
 ## Structure du Projet
 Ci-dessous, l’arborescence du projet, protégée afin d’être affichée correctement sur GitHub et dans les navigateurs :
