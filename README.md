@@ -64,9 +64,7 @@ Schéma :
                         │ 0,N
                 ┌───────┴────────┐
                 │  STUDENTCOURS   │
-                ├─────────────────┤       │
-                │ student_id : int│
-                │ cours_id : int  │
+                ├─────────────────┤       
                 │ date_inscription│
                 │ score : int     │
                 └───────┬────────┘
